@@ -6,16 +6,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-
-
-
-
-
-
 import javax.swing.Timer;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
-
 
 public class Character  extends JPanel implements ActionListener, KeyListener {
 
@@ -23,8 +16,8 @@ public class Character  extends JPanel implements ActionListener, KeyListener {
 	//change/add instance variables as needed
 	int x;
 	int y;
-	int frameNum= 50;
-	int frameNum2 = 50;
+	public int frameNumX= 50;
+	public int frameNumY = 50;
 
 
 	int framePrev;
@@ -32,16 +25,18 @@ public class Character  extends JPanel implements ActionListener, KeyListener {
 	Image img;
 	Image plat;
 	Graphics rect;
-
+	private Timer gravityTimer;
 	Graphics Character;
 
 	public Character()
 	{
+		gravityTimer = new Timer(1000, this);
+		gravityTimer.start();
 		img = new ImageIcon("CharacterRight.png").getImage();
 		plat = new ImageIcon("testPlatform.png").getImage();
 		addKeyListener(this);
 	}
-
+	
 	//Overrides the paint method to draw whatever you want.
 	public void paint(Graphics g)
 	{
@@ -51,7 +46,7 @@ public class Character  extends JPanel implements ActionListener, KeyListener {
 		g.clearRect(0, 0, getWidth(), getHeight());
 		g.setColor(Color.BLACK);
 		//	g.drawOval(x,y,50,50);
-		g.drawImage(img,frameNum,frameNum2,this);
+		g.drawImage(img,frameNumX,frameNumY,this);
 
 
 		g.drawImage(plat,0, 500, 1400, 870, null);
@@ -59,32 +54,30 @@ public class Character  extends JPanel implements ActionListener, KeyListener {
 
 	}
 
-	//Modify this method as needed.
-	/*public void actionPerformed(ActionEvent e)
+	public void actionPerformed1(ActionEvent e)
 	{
-		System.out.println("x:" + x);
-		frameNum++;
 		repaint();
-	}*/
+		gravity();
+	}
 	public void keyPressed(KeyEvent e)
 	{
 		if(e.getKeyCode() == KeyEvent.VK_RIGHT){
 			Boundaries();
 			img = new ImageIcon("CharacterRight.png").getImage();
-			frameNum+=7;repaint();
+			frameNumX+=7;repaint();
 		}
 		//	x += 10;
 		if(e.getKeyCode() == KeyEvent.VK_LEFT){
 			Boundaries();
 
 			img = new ImageIcon("CharacterLeft.png").getImage();
-			frameNum-=7;repaint();
+			frameNumX-=7;repaint();
 		}
 		//x -= 10;
 		if(e.getKeyCode() == KeyEvent.VK_UP){
 
 			img = new ImageIcon("CHaracterUp.png").getImage();
-			frameNum2-=30;
+			frameNumY-=30;
 
 			repaint();
 			////delay this by x amount of time
@@ -103,20 +96,21 @@ public class Character  extends JPanel implements ActionListener, KeyListener {
 		if(e.getKeyCode() == KeyEvent.VK_D){
 			Boundaries();
 			img = new ImageIcon("CharacterRight.png").getImage();
-			frameNum+=7;repaint();
+			frameNumX+=7;repaint();
 		}
 		//	x += 10;
 		if(e.getKeyCode() == KeyEvent.VK_A){
 			Boundaries();
 
 			img = new ImageIcon("CharacterLeft.png").getImage();
-			frameNum-=7;repaint();
+			frameNumX-=7;repaint();
 		}
+		
 		//x -= 10;
 		if(e.getKeyCode() == KeyEvent.VK_W){
 
 			img = new ImageIcon("CHaracterUp.png").getImage();
-			frameNum2-=30;
+			frameNumY-=30;
 
 			repaint();
 			////delay this by x amount of time
@@ -147,7 +141,7 @@ public class Character  extends JPanel implements ActionListener, KeyListener {
 	public void up()
 	{
 		img = new ImageIcon("CharacterUp.png").getImage();
-		frameNum = 0;
+		frameNumX = 0;
 
 
 		t.start();
@@ -170,40 +164,39 @@ public class Character  extends JPanel implements ActionListener, KeyListener {
 		//	System.out.println("x:" + x);
 
 
-		frameNum2-= 5;
-
-
-
-
-
-
-
+		
+		gravity();
 		repaint();
 
 	}
-
+	
+	public void gravity(){
+		if (frameNumY <= 461){
+		frameNumY += 20;
+		}
+	}
 	public void illegalMove() {
-		System.out.println(frameNum2);
-		if(frameNum2 >= 462){
+		System.out.println(frameNumY);
+		if(frameNumY >= 462){
 
-			frameNum2 = 462;
+			frameNumY = 462;
 			repaint();
 
 		}else{
 
-			frameNum2+=7;
+			frameNumY+=7;
 			repaint();
 		}
 	}
 
 	void Boundaries() {
-		if(frameNum <= 0){
-			frameNum = 0;
+		if(frameNumX <= 0){
+			frameNumX = 0;
 			repaint();
 
 		}
-		if(frameNum >= 1240){
-			frameNum = 1240;
+		if(frameNumX >= 1240){
+			frameNumX = 1240;
 			repaint();
 
 		}
