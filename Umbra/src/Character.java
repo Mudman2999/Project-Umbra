@@ -169,7 +169,7 @@ public class Character  extends JPanel implements ActionListener, KeyListener {
 		repaint();
 
 	}
-	
+
 	public void gravity(){
 		if (frameNumY <= 461){
 		frameNumY += 20;
