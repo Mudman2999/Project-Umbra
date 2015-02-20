@@ -24,6 +24,11 @@ public class Character  extends JPanel implements ActionListener, KeyListener {
 
 	Image img;
 	Image plat;
+	
+	
+	Image BG;
+	
+	
 	Graphics rect;
 	private Timer gravityTimer;
 	Graphics Character;
@@ -33,7 +38,10 @@ public class Character  extends JPanel implements ActionListener, KeyListener {
 		gravityTimer = new Timer(1000, this);
 		gravityTimer.start();
 		img = new ImageIcon("CharacterRight.png").getImage();
-		plat = new ImageIcon("testPlatform.png").getImage();
+		plat = new ImageIcon("platformUmbra.png").getImage();
+		
+		
+		BG = new ImageIcon("BGUmbra.png").getImage();
 		addKeyListener(this);
 	}
 	
@@ -46,6 +54,8 @@ public class Character  extends JPanel implements ActionListener, KeyListener {
 		g.clearRect(0, 0, getWidth(), getHeight());
 		g.setColor(Color.BLACK);
 		//	g.drawOval(x,y,50,50);
+		
+		g.drawImage(BG,0,0,1290,800,this);
 		g.drawImage(img,frameNumX,frameNumY,this);
 
 
@@ -173,6 +183,8 @@ public class Character  extends JPanel implements ActionListener, KeyListener {
 	public void gravity(){
 		if (frameNumY <= 461){
 		frameNumY += 20;
+		illegalMove();
+		
 		}
 	}
 	public void illegalMove() {
