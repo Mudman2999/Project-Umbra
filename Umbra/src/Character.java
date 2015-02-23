@@ -1,7 +1,7 @@
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
-import java.awt.Shape;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -13,40 +13,45 @@ import javax.swing.JPanel;
 
 public class Character  extends JPanel implements ActionListener, KeyListener {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2682362805041451259L;
+
 	Timer t = new Timer(30,this);
-	
-// MapGenerator map =  new MapGenerator();
-	          int upper = 60;
-	          	int lower = 30;
-	          	int left = 430;
-	          	int right = 700;
-	          	int mapHeights [] = new int[3];
-	          	int mapDistances [] = new int[3];
-	          	Image platforms[] = new Image[3];
-	          	
-	          	
-	          	int position1;
-	          	int position2;
-	          	int position3;
-	          	
-	
-	                                                   
+
+	// MapGenerator map =  new MapGenerator();
+	int upper = 60;
+	int lower = 30;
+	int left = 430;
+	int right = 700;
+	int mapHeights [] = new int[3];
+	int mapDistances [] = new int[3];
+	Image platforms[] = new Image[3];
+
+
+	int position1;
+	int position2;
+	int position3;
+
+
+
 	//change/add instance variables as needed
 	int x;
 	int y;
 	public int frameNumX= 50;
-	public int frameNumY = 50;
+	public int frameNumY = 500+ mapHeights[1];
 
 
 	int framePrev;
 
 	Image img;
 	Image plat;
-	
-	
+
+
 	Image BG;
-	
-	
+
+
 	Graphics rect;
 	private Timer gravityTimer;
 	Graphics Character;
@@ -56,29 +61,29 @@ public class Character  extends JPanel implements ActionListener, KeyListener {
 		gravityTimer = new Timer(1000, this);
 		gravityTimer.start();
 		img = new ImageIcon("CharacterRight.png").getImage();
-		
-		
+
+
 		//map =  new MapGenerator();  
-		
-		
-		                              
+
+
+
 		BG = new ImageIcon("BGUmbra.png").getImage();
 		addKeyListener(this);
 		//add(map);
-	//	map.setVisible(true);
-		
-		
+		//	map.setVisible(true);
+
+
 		for(int i = 0; i < platforms.length; i++){
-			
-			
-			
+
+
+
 			mapHeights[i] =  (int) (Math.random() * (upper - lower)) + lower;
 			mapDistances[i] =  (int) (Math.random() * (right - left)) + left;
 
 
 			platforms[i] = new ImageIcon("platformUmbra.png").getImage();
 
-		
+
 
 
 			System.out.println(mapHeights[i]);
@@ -86,28 +91,28 @@ public class Character  extends JPanel implements ActionListener, KeyListener {
 
 
 		}
-		
+
 		if(mapDistances[1] +  mapDistances[2] + mapDistances[0] >1290) {
-			
-			
-			
+
+
+
 		}
-		
+
 		position1 = 0;
-	//	System.out.println(position1);
+		//	System.out.println(position1);
 		position2 = mapDistances[1];
-	//	System.out.println(position2);
+		//	System.out.println(position2);
 		position3 = mapDistances[1]+ mapDistances[2];
-//		System.out.println(position3);
-		
-		
-		
-		
-		
-		
-		
+		//		System.out.println(position3);
+
+
+
+
+
+
+
 	}                           
-	
+
 	//Overrides the paint method to draw whatever you want.
 	public void paint(Graphics g)
 	{
@@ -117,26 +122,26 @@ public class Character  extends JPanel implements ActionListener, KeyListener {
 		g.clearRect(0, 0, getWidth(), getHeight());
 		g.setColor(Color.BLACK);
 		//	g.drawOval(x,y,50,50);
-		
+
 		g.drawImage(BG,0,0,1290,800,this);
 		g.drawImage(img,frameNumX,frameNumY,this);
 
 
 		g.drawImage(plat,0, 500, 1400, 870, null);
-		
-		
 
-			
-			g.drawImage(platforms[1],position1,500,mapDistances[1],500+mapHeights[1],null);
-			
-			
-			
-			//g.drawImage(platforms[2],position2,200,mapDistances[2],mapHeights[2],null);
-			g.drawImage(platforms[2],position2,500 - mapHeights[2],mapDistances[2],500+ mapHeights[2],null);
-			g.drawImage(platforms[0], position3, 500+mapHeights[0], mapDistances[0], 500+ mapHeights[0], null);
-					
-			
-		
+
+
+
+		g.drawImage(platforms[1],position1,500,mapDistances[1],500+mapHeights[1],null);
+
+
+
+		//g.drawImage(platforms[2],position2,200,mapDistances[2],mapHeights[2],null);
+		g.drawImage(platforms[2],position2,500 - mapHeights[2],mapDistances[2],500+ mapHeights[2],null);
+		g.drawImage(platforms[0], position3, 500+mapHeights[0], mapDistances[0], 500+ mapHeights[0], null);
+
+
+
 		//addKeyListener(this);
 
 	}
@@ -192,7 +197,7 @@ public class Character  extends JPanel implements ActionListener, KeyListener {
 			img = new ImageIcon("CharacterLeft.png").getImage();
 			frameNumX-=7;repaint();
 		}
-		
+
 		//x -= 10;
 		if(e.getKeyCode() == KeyEvent.VK_W){
 
@@ -251,7 +256,7 @@ public class Character  extends JPanel implements ActionListener, KeyListener {
 		//	System.out.println("x:" + x);
 
 
-		
+
 		gravity();
 		repaint();
 
@@ -259,9 +264,9 @@ public class Character  extends JPanel implements ActionListener, KeyListener {
 
 	public void gravity(){
 		if (frameNumY <= 461){
-		frameNumY += 20;
-		illegalMove();
-		
+			frameNumY += 20;
+			illegalMove();
+
 		}
 	}
 	public void illegalMove() {
@@ -271,29 +276,40 @@ public class Character  extends JPanel implements ActionListener, KeyListener {
 			frameNumY = 462;
 			repaint();
 
-		}else{
-
-			frameNumY+=7;
-			repaint();
 		}
-	}
+	
+		
+	//	while(frameNumX <= mapDistances[1]) {
+			if(frameNumY >= 500){
 
+				frameNumY = 500;
+				repaint();
+
+		//	}
+		}
+		
+		
+	
+			if(frameNumY >= 500- mapHeights[2]){
+
+				frameNumY = 500- mapHeights[2] ;
+				repaint();
+
+			
+		}
+
+	}
 	void Boundaries() {
 		if(frameNumX <= 0){
 			frameNumX = 0;
 			repaint();
-
 		}
 		if(frameNumX >= 1240){
 			frameNumX = 1240;
 			repaint();
 
 		}
-
 	}
-
-
-
 }
 
 
