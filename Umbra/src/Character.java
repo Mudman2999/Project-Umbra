@@ -40,7 +40,7 @@ public class Character  extends JPanel implements ActionListener, KeyListener {
 	int x;
 	int y;
 	public int frameNumX= 50;
-	public int frameNumY = 500+ mapHeights[1];
+	public int frameNumY = 500;
 
 
 	int framePrev;
@@ -132,13 +132,14 @@ public class Character  extends JPanel implements ActionListener, KeyListener {
 
 
 
-		g.drawImage(platforms[1],position1,500,mapDistances[1],500+mapHeights[1],null);
+		g.drawImage(platforms[0],position1,500,mapDistances[1],500+mapHeights[0],null);
 
 
 
 		//g.drawImage(platforms[2],position2,200,mapDistances[2],mapHeights[2],null);
-		g.drawImage(platforms[2],position2,500 - mapHeights[2],mapDistances[2],500+ mapHeights[2],null);
-		g.drawImage(platforms[0], position3, 500+mapHeights[0], mapDistances[0], 500+ mapHeights[0], null);
+		g.drawImage(platforms[1],position2,500-mapHeights[1],mapDistances[2],500+ mapHeights[1],null);
+		g.drawImage(platforms[2], position3, 500+mapHeights[2], mapDistances[0], 500+ mapHeights[2], null);
+		
 
 
 
@@ -271,30 +272,31 @@ public class Character  extends JPanel implements ActionListener, KeyListener {
 	}
 	public void illegalMove() {
 		//System.out.println(frameNumY);
-		if(frameNumY >= 462){
-
-			frameNumY = 462;
-			repaint();
-
-		}
 	
 		
-	//	while(frameNumX <= mapDistances[1]) {
-			if(frameNumY >= 500){
+		if(frameNumX <= position2) {
+			if(frameNumY >= 475){
 
-				frameNumY = 500;
+				frameNumY = 475;
 				repaint();
 
-		//	}
+			}
 		}
 		
 		
-	
-			if(frameNumY >= 500- mapHeights[2]){
+		else if (frameNumX > position2 && frameNumX < position3){
+			if(frameNumY >= 500- mapHeights[1]){
 
-				frameNumY = 500- mapHeights[2] ;
+				frameNumY = 500- mapHeights[1] ;
 				repaint();
-
+			
+		}
+		}
+		else if(frameNumX >= position3){
+			if(frameNumY >= 500 + mapHeights[2]){
+				frameNumY = 500 + mapHeights[2];
+				
+			}
 			
 		}
 
