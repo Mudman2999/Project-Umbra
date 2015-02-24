@@ -1,12 +1,12 @@
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+import javax.swing.JButton;
 import javax.swing.Timer;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
@@ -20,11 +20,13 @@ public class Character  extends JPanel implements ActionListener, KeyListener {
 
 	Timer t = new Timer(30,this);
 
+
+
 	// MapGenerator map =  new MapGenerator();
 	int upper = 60;
 	int lower = 30;
-	int left = 430;
-	int right = 700;
+	int left = 15;
+	int right = 1290;
 	int mapHeights [] = new int[3];
 	int mapDistances [] = new int[3];
 	Image platforms[] = new Image[3];
@@ -63,14 +65,13 @@ public class Character  extends JPanel implements ActionListener, KeyListener {
 		img = new ImageIcon("CharacterRight.png").getImage();
 
 
-		//map =  new MapGenerator();  
-
-
-
 		BG = new ImageIcon("BGUmbra.png").getImage();
 		addKeyListener(this);
 		//add(map);
 		//	map.setVisible(true);
+
+
+
 
 
 		for(int i = 0; i < platforms.length; i++){
@@ -85,9 +86,11 @@ public class Character  extends JPanel implements ActionListener, KeyListener {
 
 
 
-
 			System.out.println(mapHeights[i]);
 			System.out.println(mapDistances[i]);
+
+
+
 
 
 		}
@@ -139,17 +142,24 @@ public class Character  extends JPanel implements ActionListener, KeyListener {
 		//g.drawImage(platforms[2],position2,200,mapDistances[2],mapHeights[2],null);
 		g.drawImage(platforms[1],position2,500-mapHeights[1],mapDistances[2],500+ mapHeights[1],null);
 		g.drawImage(platforms[2], position3, 500+mapHeights[2], mapDistances[0], 500+ mapHeights[2], null);
-		
+
 
 
 
 		//addKeyListener(this);
 
+
+
+
 	}
+
+
+
+
 
 	public void actionPerformed1(ActionEvent e)
 	{
-		repaint();
+		//repaint();
 		gravity();
 	}
 	public void keyPressed(KeyEvent e)
@@ -272,8 +282,8 @@ public class Character  extends JPanel implements ActionListener, KeyListener {
 	}
 	public void illegalMove() {
 		//System.out.println(frameNumY);
-	
-		
+
+
 		if(frameNumX <= position2) {
 			if(frameNumY >= 475){
 
@@ -282,22 +292,22 @@ public class Character  extends JPanel implements ActionListener, KeyListener {
 
 			}
 		}
-		
-		
+
+
 		else if (frameNumX > position2 && frameNumX < position3){
 			if(frameNumY >= 500- mapHeights[1]){
 
 				frameNumY = 500- mapHeights[1] ;
 				repaint();
-			
-		}
+
+			}
 		}
 		else if(frameNumX >= position3){
 			if(frameNumY >= 500 + mapHeights[2]){
 				frameNumY = 500 + mapHeights[2];
-				
+
 			}
-			
+
 		}
 
 	}

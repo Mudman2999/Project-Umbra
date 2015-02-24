@@ -43,20 +43,20 @@ public class MapGenerator extends Component {
 
 
 	}
-	
+
 	public void paint(Graphics g)
 	{
 
 
-for (int i = 0; i<platforms.length;i++) {
-	
-	g.drawImage(platforms[i],0,0,mapHeights[i],mapDistances[i],null);
-}
-	
+		for (int i = 0; i<platforms.length;i++) {
+
+			g.drawImage(platforms[i],0,0,mapHeights[i],mapDistances[i],null);
+		}
+
 
 		//addKeyListener(this);
 
 	}
-	
-	
+
+
 }	
