@@ -37,7 +37,7 @@ public class Enemy implements ActionListener  {
 	public Enemy() {
 
 		for (int i = 0; i<enemies.length;i++) {
-			enemies[i] = new ImageIcon("UmbraCoin.png").getImage();
+			enemies[i] = new ImageIcon("enemyUmbra.png").getImage();
 
 		}
 
@@ -61,13 +61,11 @@ public class Enemy implements ActionListener  {
 
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
-		movement();
+	///	movement();
 
 	}
 
-	public void movement(){
 
-	}
 
 
 

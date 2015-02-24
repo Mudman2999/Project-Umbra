@@ -25,8 +25,8 @@ public class Character  extends JPanel implements ActionListener, KeyListener {
 	// MapGenerator map =  new MapGenerator();
 	int upper = 60;
 	int lower = 30;
-	int left = 15;
-	int right = 1290;
+	int left = 430;
+	int right = 500;
 	int mapHeights [] = new int[3];
 	int mapDistances [] = new int[3];
 	Image platforms[] = new Image[3];
@@ -42,7 +42,7 @@ public class Character  extends JPanel implements ActionListener, KeyListener {
 	int x;
 	int y;
 	public int frameNumX= 50;
-	public int frameNumY = 500;
+	public int frameNumY = 460;
 
 
 	int framePrev;
@@ -87,7 +87,6 @@ public class Character  extends JPanel implements ActionListener, KeyListener {
 
 
 			System.out.println(mapHeights[i]);
-			System.out.println(mapDistances[i]);
 
 
 
@@ -96,16 +95,16 @@ public class Character  extends JPanel implements ActionListener, KeyListener {
 		}
 
 		if(mapDistances[1] +  mapDistances[2] + mapDistances[0] >1290) {
-
+	
 
 
 		}
 
-		position1 = 0;
+
 		//	System.out.println(position1);
-		position2 = mapDistances[1];
+		position2 = mapDistances[0];
 		//	System.out.println(position2);
-		position3 = mapDistances[1]+ mapDistances[2];
+		position3 = position2 + mapDistances[1];
 		//		System.out.println(position3);
 
 
@@ -135,7 +134,7 @@ public class Character  extends JPanel implements ActionListener, KeyListener {
 
 
 
-		g.drawImage(platforms[0],position1,500,mapDistances[1],500+mapHeights[0],null);
+		g.drawImage(platforms[0],0,500,mapDistances[0],500+mapHeights[0],null);
 
 
 
@@ -181,7 +180,7 @@ public class Character  extends JPanel implements ActionListener, KeyListener {
 
 			img = new ImageIcon("CHaracterUp.png").getImage();
 			frameNumY-=30;
-
+			gravity();
 			repaint();
 			////delay this by x amount of time
 			//frameNum2 += 30;
@@ -190,7 +189,10 @@ public class Character  extends JPanel implements ActionListener, KeyListener {
 		}
 
 		if(e.getKeyCode() == KeyEvent.VK_DOWN){
-			illegalMove();
+			gravity();
+			
+			System.out.println(frameNumY);
+			
 
 		}
 
@@ -213,7 +215,7 @@ public class Character  extends JPanel implements ActionListener, KeyListener {
 		if(e.getKeyCode() == KeyEvent.VK_W){
 
 			img = new ImageIcon("CHaracterUp.png").getImage();
-			frameNumY-=30;
+			frameNumY-=40;
 
 			repaint();
 			////delay this by x amount of time
@@ -274,16 +276,64 @@ public class Character  extends JPanel implements ActionListener, KeyListener {
 	}
 
 	public void gravity(){
-		if (frameNumY <= 461){
-			frameNumY += 20;
-			illegalMove();
-
+		if((frameNumX > 0) &&(frameNumX < mapDistances[0]) ) { 
+			if(frameNumY <= 460 ) {
+				frameNumY += 20;
+				repaint();
+			}
+		}
+		
+		if((frameNumX > 0) &&(frameNumX < mapDistances[0]) ) { 
+			if(frameNumY >= 460 ) {
+				frameNumY = 460;
+				repaint();
+			}
+		}
+			
+		
+		
+		
+		
+		
+		
+		if((frameNumX > mapDistances[0]) &&(frameNumX < mapDistances[0] + mapDistances[1]) ) { 
+			if(frameNumY <= 445 - mapHeights[1] ) {
+				frameNumY += 20;
+				repaint();
+			}
+		}
+		
+		if((frameNumX > mapDistances[0]) &&(frameNumX < mapDistances[0] + mapDistances[1]) )  { 
+			if(frameNumY >= 445  - mapHeights[1] ) {
+				frameNumY  = 445  - mapHeights[1];
+				repaint();
+			}
+		}
+		
+		
+		
+		
+		
+		
+		if((frameNumX > mapDistances[1]) &&(frameNumX < mapDistances[0] + mapDistances[1]+ mapDistances[2]) ) { 
+			if(frameNumY <= 450+mapHeights[2] ) {
+				frameNumY += 20;
+				repaint();
+			}
+		}
+		
+		if((frameNumX > mapDistances[1]) &&(frameNumX < mapDistances[0] + mapDistances[1]+ mapHeights[2]) )  { 
+			if(frameNumY >= 445+mapHeights[2] ) {
+				frameNumY += 20;
+				
+				repaint();
+			}
 		}
 	}
 	public void illegalMove() {
 		//System.out.println(frameNumY);
 
-
+/*
 		if(frameNumX <= position2) {
 			if(frameNumY >= 475){
 
@@ -308,6 +358,25 @@ public class Character  extends JPanel implements ActionListener, KeyListener {
 
 			}
 
+		}
+		
+		*/
+		if((frameNumX > 0) &&(frameNumX < mapDistances[0]) ) { 
+			if(frameNumY <= 500 ) {
+				frameNumY += 20;
+				repaint();
+			}
+		}
+		
+		if((frameNumX > 0) &&(frameNumX < mapDistances[0]) ) { 
+			if(frameNumY >= 500 ) {
+				frameNumY = 460;
+				repaint();
+			}
+		}
+		else {
+			
+			System.out.println("Zone Out");
 		}
 
 	}
