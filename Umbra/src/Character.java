@@ -86,7 +86,7 @@ public class Character  extends JPanel implements ActionListener, KeyListener {
 
 
 
-			System.out.println(mapHeights[i]);
+			System.out.println("Height"+ ":"+mapHeights[i]);
 
 
 
@@ -95,7 +95,7 @@ public class Character  extends JPanel implements ActionListener, KeyListener {
 		}
 
 		if(mapDistances[1] +  mapDistances[2] + mapDistances[0] >1290) {
-	
+
 
 
 		}
@@ -123,33 +123,17 @@ public class Character  extends JPanel implements ActionListener, KeyListener {
 
 		g.clearRect(0, 0, getWidth(), getHeight());
 		g.setColor(Color.BLACK);
-		//	g.drawOval(x,y,50,50);
 
 		g.drawImage(BG,0,0,1290,800,this);
 		g.drawImage(img,frameNumX,frameNumY,this);
-
-
 		g.drawImage(plat,0, 500, 1400, 870, null);
-
-
-
-
-		g.drawImage(platforms[0],0,500,mapDistances[0],500+mapHeights[0],null);
-
-
-
-		//g.drawImage(platforms[2],position2,200,mapDistances[2],mapHeights[2],null);
-		g.drawImage(platforms[1],position2,500-mapHeights[1],mapDistances[2],500+ mapHeights[1],null);
-		g.drawImage(platforms[2], position3, 500+mapHeights[2], mapDistances[0], 500+ mapHeights[2], null);
-
-
-
-
-		//addKeyListener(this);
-
-
-
-
+		
+		
+		//platforms 
+		g.drawImage(platforms[0],position1,500,mapDistances[0],535,null);
+		g.drawImage(platforms[1],position2,460,mapDistances[1],535,null);
+		g.drawImage(platforms[2],position3,530, mapDistances[2],535, null);
+		
 	}
 
 
@@ -166,22 +150,28 @@ public class Character  extends JPanel implements ActionListener, KeyListener {
 		if(e.getKeyCode() == KeyEvent.VK_RIGHT){
 			Boundaries();
 			img = new ImageIcon("CharacterRight.png").getImage();
-			frameNumX+=7;repaint();
+			frameNumX+=14;
+			illegalMove();
+
+			repaint();
 		}
 		//	x += 10;
 		if(e.getKeyCode() == KeyEvent.VK_LEFT){
 			Boundaries();
 
 			img = new ImageIcon("CharacterLeft.png").getImage();
-			frameNumX-=7;repaint();
+			frameNumX-=14;repaint();
+			illegalMove();
 		}
 		//x -= 10;
 		if(e.getKeyCode() == KeyEvent.VK_UP){
 
 			img = new ImageIcon("CHaracterUp.png").getImage();
-			frameNumY-=30;
+			frameNumY-=70;
 			gravity();
 			repaint();
+
+			//	illegalMove();
 			////delay this by x amount of time
 			//frameNum2 += 30;
 
@@ -190,9 +180,10 @@ public class Character  extends JPanel implements ActionListener, KeyListener {
 
 		if(e.getKeyCode() == KeyEvent.VK_DOWN){
 			gravity();
-			
-			System.out.println(frameNumY);
-			
+
+			System.out.println("X"+frameNumX);
+			System.out.println("Y"+frameNumY);
+
 
 		}
 
@@ -276,109 +267,102 @@ public class Character  extends JPanel implements ActionListener, KeyListener {
 	}
 
 	public void gravity(){
-		if((frameNumX > 0) &&(frameNumX < mapDistances[0]) ) { 
-			if(frameNumY <= 460 ) {
-				frameNumY += 20;
-				repaint();
-			}
-		}
 		
-		if((frameNumX > 0) &&(frameNumX < mapDistances[0]) ) { 
-			if(frameNumY >= 460 ) {
-				frameNumY = 460;
-				repaint();
-			}
-		}
-			
-		
-		
-		
-		
-		
-		
-		if((frameNumX > mapDistances[0]) &&(frameNumX < mapDistances[0] + mapDistances[1]) ) { 
-			if(frameNumY <= 445 - mapHeights[1] ) {
-				frameNumY += 20;
-				repaint();
-			}
-		}
-		
-		if((frameNumX > mapDistances[0]) &&(frameNumX < mapDistances[0] + mapDistances[1]) )  { 
-			if(frameNumY >= 445  - mapHeights[1] ) {
-				frameNumY  = 445  - mapHeights[1];
-				repaint();
-			}
-		}
-		
-		
-		
-		
-		
-		
-		if((frameNumX > mapDistances[1]) &&(frameNumX < mapDistances[0] + mapDistances[1]+ mapDistances[2]) ) { 
-			if(frameNumY <= 450+mapHeights[2] ) {
-				frameNumY += 20;
-				repaint();
-			}
-		}
-		
-		if((frameNumX > mapDistances[1]) &&(frameNumX < mapDistances[0] + mapDistances[1]+ mapHeights[2]) )  { 
-			if(frameNumY >= 445+mapHeights[2] ) {
-				frameNumY += 20;
-				
-				repaint();
-			}
-		}
-	}
-	public void illegalMove() {
-		//System.out.println(frameNumY);
-
-/*
-		if(frameNumX <= position2) {
-			if(frameNumY >= 475){
-
-				frameNumY = 475;
-				repaint();
-
-			}
-		}
-
-
-		else if (frameNumX > position2 && frameNumX < position3){
-			if(frameNumY >= 500- mapHeights[1]){
-
-				frameNumY = 500- mapHeights[1] ;
-				repaint();
-
-			}
-		}
-		else if(frameNumX >= position3){
-			if(frameNumY >= 500 + mapHeights[2]){
-				frameNumY = 500 + mapHeights[2];
-
-			}
-
-		}
-		
-		*/
+		//first platform
 		if((frameNumX > 0) &&(frameNumX < mapDistances[0]) ) { 
 			if(frameNumY <= 500 ) {
 				frameNumY += 20;
 				repaint();
 			}
 		}
-		
+
 		if((frameNumX > 0) &&(frameNumX < mapDistances[0]) ) { 
-			if(frameNumY >= 500 ) {
-				frameNumY = 460;
+			if(frameNumY >= 465 ) {
+				frameNumY = 465;
 				repaint();
 			}
 		}
-		else {
-			
-			System.out.println("Zone Out");
+		
+		
+		//second platform
+		if((frameNumX >mapDistances[0]) &&(frameNumX < mapDistances[0] + mapDistances[1]) ) { 
+			if(frameNumY <= 460) {
+				frameNumY += 20;
+				//illegalMove();
+
+				repaint();
+			}
 		}
 
+		if((frameNumX > mapDistances[0]) &&(frameNumX < mapDistances[0] + mapDistances[1]) )  { 
+			if(frameNumY >= 425 ) {
+				frameNumY  = 425 ;	
+				repaint();
+				//illegalMove();
+			}
+		}
+		
+		
+		//Third Platform
+		if((frameNumX >= position3) &&(frameNumX < mapDistances[0] + mapDistances[1]+ mapDistances[2]) ) { 
+			if(frameNumY <= 530 ) {
+				frameNumY += 20;
+				repaint();
+			}
+		}
+		if((frameNumX >= position3) &&(frameNumX < mapDistances[0] + mapDistances[1]+ mapDistances[2]) )  { 
+			if(frameNumY >= 495 ) {
+				frameNumY  = 495  ;	
+				repaint();
+			}
+		}
+		
+		if(frameNumY <370) {
+			frameNumY = 370;
+			
+			
+		}
+		
+		
+	}	
+	public void illegalMove() {
+
+		if((frameNumY <= 800)  && (frameNumY >= 400)) {
+			System.out.println("True");
+
+			gravity();
+			if((frameNumX>= position2-35) && (frameNumX <= position2 -7))  {
+				
+				System.out.println(frameNumX);
+
+				frameNumX = position2 - 35;
+
+
+				gravity();
+
+			}
+		}
+		
+		
+		
+		
+		if((frameNumY <= 800)  && (frameNumY >= 460)) {
+			System.out.println("True");
+
+			gravity();
+			if((frameNumX>= position3-35) && (frameNumX <= position3 -7))  {
+				
+				System.out.println(frameNumX);
+
+				frameNumX = position3 - 35;
+
+
+				gravity();
+
+			}
+		}
+		
+		
 	}
 	void Boundaries() {
 		if(frameNumX <= 0){
