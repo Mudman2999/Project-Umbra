@@ -9,6 +9,7 @@ import java.awt.event.KeyListener;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.Timer;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
@@ -455,42 +456,37 @@ int scoreNum = 0;
 				
 				
 				}
-			}
-
-
-
-			
-			
-			if(((frameNumX >= posEnemyX[i] - 14) && (frameNumX <= posEnemyX[i] + 35+ 14))) {
-				//System.out.println("Dead");
 				
 				
-				if(frameNumY <= posEnemyY[i]) {
+				if(frameNumY >= posEnemyY[i]) {
+					
+					System.out.println("Dead");
+					Graphics g = null;
+					
+					
+		
+					
+					//newPosEnemy(i);
+					JOptionPane.showMessageDialog(null, "Game Over!");
 				
-				System.out.println("Dead");
-				Graphics g = null;
-				
-				
-	
-
-				newPosEnemy(i);
-				
-				scoreNum++;
-				
-				String scoreString = "" + scoreNum;
-				
-				
-				score.setText(scoreString);
-				
-				
-				}
+					
+					//score.setText(scoreString);
+					
+					
+					}
 			}
 			
+
+
+
+			
+			
+		
 			
 			
 			
 		}
-
+		
 		
 	}
 
