@@ -7,6 +7,8 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 import javax.swing.JButton;
+import javax.swing.JComponent;
+import javax.swing.JLabel;
 import javax.swing.Timer;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
@@ -30,6 +32,16 @@ public class Character  extends JPanel implements ActionListener, KeyListener {
 	int mapHeights [] = new int[3];
 	int mapDistances [] = new int[3];
 	Image platforms[] = new Image[3];
+
+	Image[] enemy = new Image[7];
+	int[] posEnemyX = new int[7];
+	int[] posEnemyY = new int[7];
+	int[] yDiff = new int[7];
+
+	JLabel score = new JLabel();
+	
+int scoreNum = 0;
+
 
 
 	int position1;
@@ -70,6 +82,14 @@ public class Character  extends JPanel implements ActionListener, KeyListener {
 		//add(map);
 		//	map.setVisible(true);
 
+
+		for (int i = 0; i<enemy.length; i++) {
+			enemy[i] = new ImageIcon("enemyUmbra.png").getImage();
+			posEnemyX[i] = (int) (Math.random() * (1290)) +80 ;
+
+
+
+		}
 
 
 
@@ -127,12 +147,21 @@ public class Character  extends JPanel implements ActionListener, KeyListener {
 		g.drawImage(BG,0,0,1290,800,this);
 		g.drawImage(img,frameNumX,frameNumY,this);
 		g.drawImage(plat,0, 500, 1400, 870, null);
-		
-		
+
+
 		//platforms 
 		g.drawImage(platforms[0],position1,500,mapDistances[0],535,null);
 		g.drawImage(platforms[1],position2,460,mapDistances[1],535,null);
 		g.drawImage(platforms[2],position3,530, mapDistances[2],535, null);
+
+
+		for (int i = 0; i<enemy.length; i++) {
+
+
+
+			g.drawImage(enemy[i],posEnemyX[i],posEnemyY[i],35,35,null);
+		}
+		add(score);
 		
 	}
 
@@ -144,6 +173,8 @@ public class Character  extends JPanel implements ActionListener, KeyListener {
 	{
 		//repaint();
 		gravity();
+	//	enemyKill();
+		
 	}
 	public void keyPressed(KeyEvent e)
 	{
@@ -185,6 +216,7 @@ public class Character  extends JPanel implements ActionListener, KeyListener {
 			System.out.println("Y"+frameNumY);
 
 
+
 		}
 
 
@@ -192,21 +224,21 @@ public class Character  extends JPanel implements ActionListener, KeyListener {
 		if(e.getKeyCode() == KeyEvent.VK_D){
 			Boundaries();
 			img = new ImageIcon("CharacterRight.png").getImage();
-			frameNumX+=7;repaint();
+			frameNumX+=14;repaint();
 		}
 		//	x += 10;
 		if(e.getKeyCode() == KeyEvent.VK_A){
 			Boundaries();
 
 			img = new ImageIcon("CharacterLeft.png").getImage();
-			frameNumX-=7;repaint();
+			frameNumX-=14;repaint();
 		}
 
 		//x -= 10;
 		if(e.getKeyCode() == KeyEvent.VK_W){
 
 			img = new ImageIcon("CHaracterUp.png").getImage();
-			frameNumY-=40;
+			frameNumY-=70;
 
 			repaint();
 			////delay this by x amount of time
@@ -218,43 +250,20 @@ public class Character  extends JPanel implements ActionListener, KeyListener {
 		if(e.getKeyCode() == KeyEvent.VK_S	){
 			illegalMove();
 
+			gravity();
+
+
 		}
 
 
 		if(e.getKeyCode() == KeyEvent.VK_SPACE) {			
-
+			img = new ImageIcon("CHaracterUp.png").getImage();
+			frameNumY-=70;
+			gravity();
+			repaint();
 		}
 
 	}
-	public void keyReleased(KeyEvent e) {
-		//frameNum2 = 460;	
-	}
-	public void keyTyped(KeyEvent e) {
-
-
-
-	}
-	public void up()
-	{
-		img = new ImageIcon("CharacterUp.png").getImage();
-		frameNumX = 0;
-
-
-		t.start();
-
-
-
-		System.out.println(t);
-
-
-		addKeyListener(this);
-
-
-
-
-	}
-
-
 	public void actionPerformed(ActionEvent e)
 	{
 		//	System.out.println("x:" + x);
@@ -267,7 +276,7 @@ public class Character  extends JPanel implements ActionListener, KeyListener {
 	}
 
 	public void gravity(){
-		
+
 		//first platform
 		if((frameNumX > 0) &&(frameNumX < mapDistances[0]) ) { 
 			if(frameNumY <= 500 ) {
@@ -279,11 +288,12 @@ public class Character  extends JPanel implements ActionListener, KeyListener {
 		if((frameNumX > 0) &&(frameNumX < mapDistances[0]) ) { 
 			if(frameNumY >= 465 ) {
 				frameNumY = 465;
+
 				repaint();
 			}
 		}
-		
-		
+
+
 		//second platform
 		if((frameNumX >mapDistances[0]) &&(frameNumX < mapDistances[0] + mapDistances[1]) ) { 
 			if(frameNumY <= 460) {
@@ -301,8 +311,8 @@ public class Character  extends JPanel implements ActionListener, KeyListener {
 				//illegalMove();
 			}
 		}
-		
-		
+
+
 		//Third Platform
 		if((frameNumX >= position3) &&(frameNumX < mapDistances[0] + mapDistances[1]+ mapDistances[2]) ) { 
 			if(frameNumY <= 530 ) {
@@ -316,15 +326,40 @@ public class Character  extends JPanel implements ActionListener, KeyListener {
 				repaint();
 			}
 		}
-		
+
 		if(frameNumY <370) {
 			frameNumY = 370;
-			
-			
+
+
 		}
+		illegalEnemy();
 		
+		enemyKill();
 		
 	}	
+
+
+	public void illegalEnemy() {
+		for(int i = 0; i<enemy.length;i++) {
+
+			if((posEnemyX[i] >= mapDistances[0] ) && (posEnemyX[i] < position3 )) {
+				posEnemyY[i] = 425;
+
+			}
+			if((posEnemyX[i] > 0 ) &&(posEnemyX[i] < mapDistances[0] )) {
+				posEnemyY[i] = 465;
+
+			}
+
+			if((posEnemyX[i] >= position3 ) && (posEnemyX[i] < 1290 )) {
+				posEnemyY[i] = 495;
+
+			}
+
+
+
+		}
+	}
 	public void illegalMove() {
 
 		if((frameNumY <= 800)  && (frameNumY >= 400)) {
@@ -332,7 +367,7 @@ public class Character  extends JPanel implements ActionListener, KeyListener {
 
 			gravity();
 			if((frameNumX>= position2-35) && (frameNumX <= position2 -7))  {
-				
+
 				System.out.println(frameNumX);
 
 				frameNumX = position2 - 35;
@@ -342,16 +377,16 @@ public class Character  extends JPanel implements ActionListener, KeyListener {
 
 			}
 		}
-		
-		
-		
-		
+
+
+
+
 		if((frameNumY <= 800)  && (frameNumY >= 460)) {
 			System.out.println("True");
 
 			gravity();
 			if((frameNumX>= position3-35) && (frameNumX <= position3 -7))  {
-				
+
 				System.out.println(frameNumX);
 
 				frameNumX = position3 - 35;
@@ -361,8 +396,8 @@ public class Character  extends JPanel implements ActionListener, KeyListener {
 
 			}
 		}
-		
-		
+
+
 	}
 	void Boundaries() {
 		if(frameNumX <= 0){
@@ -375,6 +410,60 @@ public class Character  extends JPanel implements ActionListener, KeyListener {
 
 		}
 	}
+
+	@Override
+	public void keyTyped(KeyEvent e) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+		// TODO Auto-generated method stub
+
+	}
+	public void newPosEnemy(int enemyInt) {
+
+
+		posEnemyX[enemyInt] = (int) (Math.random() * (1290)) + 30 ;
+	}
+
+	public void enemyKill() {
+		for (int i = 0; i<enemy.length;i++) {
+			yDiff[i] = posEnemyY[i] - frameNumY-35;
+			//System.out.println("started");
+			if(((frameNumX >= posEnemyX[i] - 14) && (frameNumX <= posEnemyX[i] + 35+ 14))) {
+				System.out.println("hi");
+				
+				
+				if(( 50>= yDiff[i]) &&(yDiff[i] <= 50)) {
+				
+				
+				Graphics g = null;
+				
+				
+	
+
+				newPosEnemy(i);
+				
+				scoreNum++;
+				
+				String scoreString = "" + scoreNum;
+				
+				
+				score.setText(scoreString);
+				
+				
+				}
+			}
+
+
+
+		}
+
+		
+	}
+
 }
 
 

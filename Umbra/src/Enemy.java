@@ -46,6 +46,10 @@ public class Enemy implements ActionListener  {
 			randomPositions[i] = (int) (Math.random() * (right - left)) + left;
 			System.out.println(randomPositions[i]);
 		}
+		
+		
+
+		
 	}
 
 

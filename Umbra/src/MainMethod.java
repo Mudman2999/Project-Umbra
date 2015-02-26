@@ -1,10 +1,12 @@
+import javax.swing.ImageIcon;
+
 
 public class MainMethod {
 	public static void main(String[] args) {
 		//MapGenerator h = new MapGenerator();
-		Window  mainWin = new Window();
+		Window  mainWin = new Window("Umbra");
 
-		//Enemy test = new Enemy();
+		
 
 	}
 }
