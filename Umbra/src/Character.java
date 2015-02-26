@@ -433,12 +433,12 @@ int scoreNum = 0;
 			yDiff[i] = posEnemyY[i] - frameNumY-35;
 			//System.out.println("started");
 			if(((frameNumX >= posEnemyX[i] - 14) && (frameNumX <= posEnemyX[i] + 35+ 14))) {
-				System.out.println("hi");
+				//System.out.println("Dead");
 				
 				
-				if(( 50>= yDiff[i]) &&(yDiff[i] <= 50)) {
+				if(( 14>= yDiff[i]) &&(yDiff[i] <= 35)) {
 				
-				
+				System.out.println("EnemyKill");
 				Graphics g = null;
 				
 				
@@ -459,6 +459,36 @@ int scoreNum = 0;
 
 
 
+			
+			
+			if(((frameNumX >= posEnemyX[i] - 14) && (frameNumX <= posEnemyX[i] + 35+ 14))) {
+				//System.out.println("Dead");
+				
+				
+				if(frameNumY <= posEnemyY[i]) {
+				
+				System.out.println("Dead");
+				Graphics g = null;
+				
+				
+	
+
+				newPosEnemy(i);
+				
+				scoreNum++;
+				
+				String scoreString = "" + scoreNum;
+				
+				
+				score.setText(scoreString);
+				
+				
+				}
+			}
+			
+			
+			
+			
 		}
 
 		
