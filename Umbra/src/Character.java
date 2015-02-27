@@ -14,8 +14,10 @@ import javax.swing.Timer;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
+
 public class Character  extends JPanel implements ActionListener, KeyListener {
 
+	boolean isOnGround = true;
 	/**
 	 * 
 	 */
@@ -185,7 +187,10 @@ public class Character  extends JPanel implements ActionListener, KeyListener {
 		if(e.getKeyCode() == KeyEvent.VK_UP){
 
 			img = new ImageIcon("CHaracterUp.png").getImage();
-			frameNumY-=70;
+			if (isOnGround){
+			frameNumY-=100;
+			isOnGround = false;
+			}
 			gravity();
 			repaint();
 
@@ -225,7 +230,10 @@ public class Character  extends JPanel implements ActionListener, KeyListener {
 		if(e.getKeyCode() == KeyEvent.VK_W){
 
 			img = new ImageIcon("CHaracterUp.png").getImage();
-			frameNumY-=70;
+			if (isOnGround){
+			frameNumY-=100;
+			isOnGround = false;
+			}
 
 			repaint();
 			////delay this by x amount of time
@@ -254,7 +262,35 @@ public class Character  extends JPanel implements ActionListener, KeyListener {
 	public void actionPerformed(ActionEvent e)
 	{
 		//	System.out.println("x:" + x);
+		if((frameNumX > 0) &&(frameNumX < map.mapDistances[0]) ) { 
+			if(frameNumY <= 500 ) {
+				isOnGround = true;
+				repaint();
+			}
+		}
 
+		
+		
+
+
+		//second platform
+		if((frameNumX >map.mapDistances[0]) &&(frameNumX < map.mapDistances[0] + map.mapDistances[1]) ) { 
+			if(frameNumY <= 460) {
+				isOnGround = true;
+
+				repaint();
+			}
+		}
+
+
+		//Third Platform
+		if((frameNumX >= position3) &&(frameNumX < map.mapDistances[0] + map.mapDistances[1]+ map.mapDistances[2]) ) { 
+			if(frameNumY <= 530 ) {
+				isOnGround = true;
+				repaint();
+			}
+		}
+		
 
 
 		gravity();
