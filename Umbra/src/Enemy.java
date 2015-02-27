@@ -21,6 +21,8 @@ public class Enemy implements ActionListener  {
 	int[] posEnemyY = new int[7];
 	int[] yDiff = new int[7];
 	
+	int distance = 0;
+	
 	
 
 	public Enemy() {
@@ -58,6 +60,7 @@ public class Enemy implements ActionListener  {
 
 			if((posEnemyX[i] >=  plat1) && (posEnemyX[i] < plat2 )) {
 				posEnemyY[i] = 425;
+				
 
 			}
 			if((posEnemyX[i] > 0 ) &&(posEnemyX[i] < plat1 )) {

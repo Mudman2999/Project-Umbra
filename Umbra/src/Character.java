@@ -305,7 +305,7 @@ public class Character  extends JPanel implements ActionListener, KeyListener {
 		//first platform
 		if((frameNumX > 0) &&(frameNumX < map.mapDistances[0]) ) { 
 			if(frameNumY <= 500 ) {
-				frameNumY += 20;
+				frameNumY += 30;
 				repaint();
 			}
 		}
@@ -316,13 +316,14 @@ public class Character  extends JPanel implements ActionListener, KeyListener {
 
 				repaint();
 			}
+			
 		}
 
 
 		//second platform
 		if((frameNumX >map.mapDistances[0]) &&(frameNumX < map.mapDistances[0] + map.mapDistances[1]) ) { 
 			if(frameNumY <= 460) {
-				frameNumY += 20;
+				frameNumY += 30;
 				//illegalMove();
 
 				repaint();
@@ -341,7 +342,7 @@ public class Character  extends JPanel implements ActionListener, KeyListener {
 		//Third Platform
 		if((frameNumX >= position3) &&(frameNumX < map.mapDistances[0] + map.mapDistances[1]+ map.mapDistances[2]) ) { 
 			if(frameNumY <= 530 ) {
-				frameNumY += 20;
+				frameNumY += 30;
 				repaint();
 			}
 		}
