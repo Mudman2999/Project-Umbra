@@ -20,10 +20,10 @@ public class Enemy implements ActionListener  {
 	int[] posEnemyX = new int[7];
 	int[] posEnemyY = new int[7];
 	int[] yDiff = new int[7];
-	
+
 	int distance = 0;
-	
-	
+
+
 
 	public Enemy() {
 
@@ -33,10 +33,10 @@ public class Enemy implements ActionListener  {
 		}
 
 
-		
-		
 
-		
+
+
+
 	}
 
 
@@ -46,7 +46,7 @@ public class Enemy implements ActionListener  {
 
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
-	///	movement();
+		///	movement();
 
 	}
 
@@ -60,16 +60,46 @@ public class Enemy implements ActionListener  {
 
 			if((posEnemyX[i] >=  plat1) && (posEnemyX[i] < plat2 )) {
 				posEnemyY[i] = 425;
-				
+				if(distance % 2 == 0) {
+
+					posEnemyX[i] -= 20;
+					distance++;
+				}
+
+				else {
+					posEnemyX[i] += 20;
+					distance++;
+				}
 
 			}
 			if((posEnemyX[i] > 0 ) &&(posEnemyX[i] < plat1 )) {
 				posEnemyY[i] = 465;
 
+				if(distance % 2 == 0) {
+
+					posEnemyX[i] += 20;
+					distance++;
+				}
+
+				else {
+					posEnemyX[i] -= 20;
+					distance++;
+				}
+
 			}
 
 			if((posEnemyX[i] >= plat2 ) && (posEnemyX[i] < 1290 )) {
 				posEnemyY[i] = 495;
+if(distance % 2 == 0) {
+					
+					posEnemyX[i] += 20;
+					distance++;
+				}
+				
+				else {
+					posEnemyX[i] -= 20;
+					distance++;
+				}
 
 			}
 
@@ -77,30 +107,30 @@ public class Enemy implements ActionListener  {
 
 		}
 	}
-	
-	
-	
+
+
+
 	public void newPosEnemy(int enemyInt) {
 
 
 		posEnemyX[enemyInt] = (int) (Math.random() * (1290)) + 30 ;
 	}
-	
-	
-	
-	
-	
-	
+
+
+
+
+
+
 	void restart(){
 		for (int i = 0; i<enemy.length; i++) {
 			enemy[i] = new ImageIcon("enemyUmbra.png").getImage();
 			posEnemyX[i] = (int) (Math.random() * (1290)) +80 ;
 		}
-	//	charact.frameNumX= 50;
+		//	charact.frameNumX= 50;
 		//charact.frameNumY = 460;
 		//charact.scoreNum = -1;
 
-	//	character.repaint();
+		//	character.repaint();
 	}
 }
 

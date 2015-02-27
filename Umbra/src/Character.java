@@ -38,7 +38,7 @@ public class Character  extends JPanel implements ActionListener, KeyListener {
 	int right = 500;
 	
 
-	
+		
 
 
 	int scoreNum = -1;
@@ -188,7 +188,7 @@ public class Character  extends JPanel implements ActionListener, KeyListener {
 
 			img = new ImageIcon("CHaracterUp.png").getImage();
 			if (isOnGround){
-			frameNumY-=100;
+			frameNumY-=150;
 			isOnGround = false;
 			}
 			gravity();
@@ -231,7 +231,7 @@ public class Character  extends JPanel implements ActionListener, KeyListener {
 
 			img = new ImageIcon("CHaracterUp.png").getImage();
 			if (isOnGround){
-			frameNumY-=100;
+			frameNumY-=150;
 			isOnGround = false;
 			}
 
@@ -295,7 +295,7 @@ public class Character  extends JPanel implements ActionListener, KeyListener {
 
 		gravity();
 		repaint();
-
+		classEnemy.illegalEnemy(map.mapDistances[0], position3);
 
 
 	}
@@ -353,12 +353,12 @@ public class Character  extends JPanel implements ActionListener, KeyListener {
 			}
 		}
 
-		if(frameNumY <370) {
-			frameNumY = 370;
+		if(frameNumY <200) {
+			frameNumY = 200;
 
 
 		}
-		classEnemy.illegalEnemy(map.mapDistances[0], position3);
+		
 
 		enemyKill();
 
