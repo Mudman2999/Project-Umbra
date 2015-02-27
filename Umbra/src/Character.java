@@ -468,8 +468,7 @@ int scoreNum = 0;
 					
 					//newPosEnemy(i);
 					JOptionPane.showMessageDialog(null, "Game Over!");
-				
-					
+					restart();
 					//score.setText(scoreString);
 					
 					
@@ -488,6 +487,15 @@ int scoreNum = 0;
 		}
 		
 		
+	}
+	void restart(){
+		for (int i = 0; i<enemy.length; i++) {
+			enemy[i] = new ImageIcon("enemyUmbra.png").getImage();
+			posEnemyX[i] = (int) (Math.random() * (1290)) +80 ;
+		}
+		frameNumX= 50;
+		frameNumY = 460;
+		repaint();
 	}
 
 }
