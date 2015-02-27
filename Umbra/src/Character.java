@@ -22,6 +22,8 @@ public class Character  extends JPanel implements ActionListener, KeyListener {
 	private static final long serialVersionUID = 2682362805041451259L;
 
 	Timer t = new Timer(30,this);
+	Enemy classEnemy = new Enemy();
+	
 
 
 
@@ -39,9 +41,8 @@ public class Character  extends JPanel implements ActionListener, KeyListener {
 	int[] posEnemyY = new int[7];
 	int[] yDiff = new int[7];
 
-	JLabel score = new JLabel();
-	
-int scoreNum = 0;
+
+	int scoreNum = -1;
 
 
 
@@ -82,7 +83,6 @@ int scoreNum = 0;
 		addKeyListener(this);
 		//add(map);
 		//	map.setVisible(true);
-
 
 		for (int i = 0; i<enemy.length; i++) {
 			enemy[i] = new ImageIcon("enemyUmbra.png").getImage();
@@ -162,21 +162,15 @@ int scoreNum = 0;
 
 			g.drawImage(enemy[i],posEnemyX[i],posEnemyY[i],35,35,null);
 		}
-		add(score);
-		
+
+
 	}
 
 
 
 
 
-	public void actionPerformed1(ActionEvent e)
-	{
-		//repaint();
-		gravity();
-	//	enemyKill();
-		
-	}
+
 	public void keyPressed(KeyEvent e)
 	{
 		if(e.getKeyCode() == KeyEvent.VK_RIGHT){
@@ -274,6 +268,8 @@ int scoreNum = 0;
 		gravity();
 		repaint();
 
+
+
 	}
 
 	public void gravity(){
@@ -334,9 +330,9 @@ int scoreNum = 0;
 
 		}
 		illegalEnemy();
-		
+
 		enemyKill();
-		
+
 	}	
 
 
@@ -433,60 +429,47 @@ int scoreNum = 0;
 		for (int i = 0; i<enemy.length;i++) {
 			yDiff[i] = posEnemyY[i] - frameNumY-35;
 			//System.out.println("started");
-			if(((frameNumX >= posEnemyX[i] - 14) && (frameNumX <= posEnemyX[i] + 35+ 14))) {
+			if(((frameNumX >= posEnemyX[i] - 14) && (frameNumX <= posEnemyX[i] + 35))) {
 				//System.out.println("Dead");
-				
-				
-				if(( 14>= yDiff[i]) &&(yDiff[i] <= 35)) {
-				
-				System.out.println("EnemyKill");
-				Graphics g = null;
-				
-				
-	
 
-				newPosEnemy(i);
+
+				if(( 14>= yDiff[i]) &&(yDiff[i] <= 35)) {
+
+					System.out.println("EnemyKill");
+					Graphics g = null;
+
+
+
+
+					newPosEnemy(i);
+
+					scoreNum++;
+
+					String scoreString = "" + scoreNum;
+
+
 				
-				scoreNum++;
-				
-				String scoreString = "" + scoreNum;
-				
-				
-				score.setText(scoreString);
-				
-				
+
+
 				}
-				
-				
+
+
 				if(frameNumY >= posEnemyY[i]) {
-					
+
 					System.out.println("Dead");
 					Graphics g = null;
-					
-					
-		
-					
+
+
+
 					//newPosEnemy(i);
-					JOptionPane.showMessageDialog(null, "Game Over!");
+					JOptionPane.showMessageDialog(null, "Game Over! You killed "+  scoreNum + " enemies!");
 					restart();
 					//score.setText(scoreString);
-					
-					
-					}
+
+
+				}
 			}
-			
-
-
-
-			
-			
-		
-			
-			
-			
 		}
-		
-		
 	}
 	void restart(){
 		for (int i = 0; i<enemy.length; i++) {
@@ -495,9 +478,8 @@ int scoreNum = 0;
 		}
 		frameNumX= 50;
 		frameNumY = 460;
+		scoreNum = -1;
+
 		repaint();
 	}
-
 }
-
-
