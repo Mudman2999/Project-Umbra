@@ -16,36 +16,21 @@ import java.awt.*;
 
 
 public class Enemy implements ActionListener  {
-	int i = 10;
-	Timer t = new Timer(30,this);
-
-
-	int randomPositions[] = new int[i];
-	Image enemies[] = new Image[i];
-
-	//Image enemy[] = new Image[1];
-
-
-	int upper = 60;
-	int lower = 30;
-	int left = 430;
-	int right = 700;
-
-
-
+	Image[] enemy = new Image[7];
+	int[] posEnemyX = new int[7];
+	int[] posEnemyY = new int[7];
+	int[] yDiff = new int[7];
+	
+	
 
 	public Enemy() {
 
-		for (int i = 0; i<enemies.length;i++) {
-			enemies[i] = new ImageIcon("enemyUmbra.png").getImage();
+		for (int i = 0; i<enemy.length;i++) {
+			enemy[i] = new ImageIcon("enemyUmbra.png").getImage();
 
 		}
 
 
-		for (int i = 0; i<randomPositions.length; i++) {
-			randomPositions[i] = (int) (Math.random() * (right - left)) + left;
-			System.out.println(randomPositions[i]);
-		}
 		
 		
 
@@ -53,13 +38,7 @@ public class Enemy implements ActionListener  {
 	}
 
 
-	void paint(Graphics g) {
-		for (int i = 0; i<enemies.length; i++) {
-			g.drawImage(enemies[i], randomPositions[i],12, 35, 35, null);
 
-
-		}
-	}
 
 
 
@@ -74,7 +53,52 @@ public class Enemy implements ActionListener  {
 
 
 
+	public void illegalEnemy(int plat1, int plat2) {
+		for(int i = 0; i<enemy.length;i++) {
 
+			if((posEnemyX[i] >=  plat1) && (posEnemyX[i] < plat2 )) {
+				posEnemyY[i] = 425;
+
+			}
+			if((posEnemyX[i] > 0 ) &&(posEnemyX[i] < plat1 )) {
+				posEnemyY[i] = 465;
+
+			}
+
+			if((posEnemyX[i] >= plat2 ) && (posEnemyX[i] < 1290 )) {
+				posEnemyY[i] = 495;
+
+			}
+
+
+
+		}
+	}
+	
+	
+	
+	public void newPosEnemy(int enemyInt) {
+
+
+		posEnemyX[enemyInt] = (int) (Math.random() * (1290)) + 30 ;
+	}
+	
+	
+	
+	
+	
+	
+	void restart(){
+		for (int i = 0; i<enemy.length; i++) {
+			enemy[i] = new ImageIcon("enemyUmbra.png").getImage();
+			posEnemyX[i] = (int) (Math.random() * (1290)) +80 ;
+		}
+	//	charact.frameNumX= 50;
+		//charact.frameNumY = 460;
+		//charact.scoreNum = -1;
+
+	//	character.repaint();
+	}
 }
 
 

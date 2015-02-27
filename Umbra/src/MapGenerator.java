@@ -13,17 +13,21 @@ import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
 public class MapGenerator extends Component {
-	int upper = 30;
-	int lower = 5;
-	int left = 0;
-	int right = 800;
+	
+	int upper = 60;
+	int lower = 30;
+	int left = 430;
+	int right = 500;
 	int mapHeights [] = new int[3];
 	int mapDistances [] = new int[3];
 	Image platforms[] = new Image[3];
 
 
 	MapGenerator(){
-		for(int i = 0; i < 3; i++){
+		for(int i = 0; i < platforms.length; i++){
+
+
+
 			mapHeights[i] =  (int) (Math.random() * (upper - lower)) + lower;
 			mapDistances[i] =  (int) (Math.random() * (right - left)) + left;
 
@@ -32,14 +36,14 @@ public class MapGenerator extends Component {
 
 
 
+			System.out.println("Height"+ ":"+mapHeights[i]);
 
-			System.out.println(mapHeights[i]);
-			System.out.println(mapDistances[i]);
 
 
 
 
 		}
+
 
 
 	}
