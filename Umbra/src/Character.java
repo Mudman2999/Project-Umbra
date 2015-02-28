@@ -24,7 +24,6 @@ public class Character  extends JPanel implements ActionListener, KeyListener {
 	private static final long serialVersionUID = 2682362805041451259L;
 
 	Timer t = new Timer(30,this);
-	private Enemy classEnemy = new Enemy();
 	MapGenerator map = new MapGenerator();
 	
 	
@@ -65,6 +64,7 @@ public class Character  extends JPanel implements ActionListener, KeyListener {
 
 
 	Image BG;
+	public Enemy classEnemy;
 
 
 	Graphics rect;
@@ -82,6 +82,13 @@ public class Character  extends JPanel implements ActionListener, KeyListener {
 		addKeyListener(this);
 		//add(map);
 		//	map.setVisible(true);
+
+		//	System.out.println(position1);
+		position2 = map.mapDistances[0];
+		//	System.out.println(position2);
+		position3 = position2 + map.mapDistances[1];
+		//		System.out.println(position3);
+		classEnemy = new Enemy(position2, position3);
 
 		for (int i = 0; i<classEnemy.enemy.length; i++) {
 			classEnemy.enemy[i] = new ImageIcon("enemyUmbra.png").getImage();

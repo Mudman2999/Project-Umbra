@@ -6,7 +6,7 @@ import javax.swing.ImageIcon;
 
 public class Window extends JFrame{
 	private Character panel;
-	private Enemy enemy;
+	//private Enemy enemy;
 
 	public Window(String input)
 	{
