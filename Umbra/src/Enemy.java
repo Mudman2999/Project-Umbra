@@ -20,6 +20,7 @@ public class Enemy implements ActionListener  {
 	int[] posEnemyX = new int[7];
 	int[] posEnemyY = new int[7];
 	int[] yDiff = new int[7];
+<<<<<<< HEAD
 	String[] startPosition = new String[7];
 	Timer enemyTimer = new Timer(10, this);
 	int distance = 0;
@@ -30,6 +31,15 @@ public class Enemy implements ActionListener  {
 
 	public Enemy(int position2, int position3) {
 		enemyTimer.start();
+=======
+	
+	int distance = 0;
+	
+	
+
+	public Enemy() {
+
+>>>>>>> parent of f0ff11a... Jump Mode Fix; Zip File Added
 		for (int i = 0; i<enemy.length;i++) {
 			enemy[i] = new ImageIcon("enemyUmbra.png").getImage();
 
@@ -41,6 +51,12 @@ public class Enemy implements ActionListener  {
 		
 
 		
+<<<<<<< HEAD
+=======
+		
+
+		
+>>>>>>> parent of f0ff11a... Jump Mode Fix; Zip File Added
 	}
 
 
@@ -51,6 +67,7 @@ public class Enemy implements ActionListener  {
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 	///	movement();
+<<<<<<< HEAD
 		endOfPlatform(secondPlat, thirdPlat);
 		for (int i = 0; i<enemy.length; i++) {
 			if (facingRight){
@@ -60,6 +77,9 @@ public class Enemy implements ActionListener  {
 				posEnemyX[i] -= 1;
 			}
 		}
+=======
+
+>>>>>>> parent of f0ff11a... Jump Mode Fix; Zip File Added
 	}
 
 	public void whereIsEnemy(int startOfSecondPlat, int startOfThirdPlat){
